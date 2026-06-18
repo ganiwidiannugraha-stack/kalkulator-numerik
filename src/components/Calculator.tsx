@@ -266,25 +266,25 @@ json.dumps(sanitize_nan(output))
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
       {/* LEFT COLUMN - INPUT */}
       <div className="lg:col-span-4 space-y-6">
-        <div className="flex p-1 bg-slate-800/80 backdrop-blur rounded-xl">
+        <div className="flex flex-row p-1 bg-slate-800/80 backdrop-blur rounded-xl">
           <button
-            className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-lg text-sm font-medium transition-all ${mode === 'Persamaan' ? 'bg-cyan-500/20 text-cyan-300 shadow-sm' : 'text-slate-400 hover:text-slate-200'}`}
+            className={`flex-1 flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 py-2 sm:py-3 px-2 sm:px-4 rounded-lg text-xs sm:text-sm font-medium transition-all whitespace-nowrap ${mode === 'Persamaan' ? 'bg-cyan-500/20 text-cyan-300 shadow-sm' : 'text-slate-400 hover:text-slate-200'}`}
             onClick={() => setMode("Persamaan")}
           >
-            <FunctionSquare size={18} /> Persamaan f(x)
+            <FunctionSquare size={18} className="shrink-0" /> <span className="hidden xs:inline">Persamaan f(x)</span><span className="inline xs:hidden">f(x)</span>
           </button>
           <button
-            className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-lg text-sm font-medium transition-all ${mode === 'Tabel' ? 'bg-cyan-500/20 text-cyan-300 shadow-sm' : 'text-slate-400 hover:text-slate-200'}`}
+            className={`flex-1 flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 py-2 sm:py-3 px-2 sm:px-4 rounded-lg text-xs sm:text-sm font-medium transition-all whitespace-nowrap ${mode === 'Tabel' ? 'bg-cyan-500/20 text-cyan-300 shadow-sm' : 'text-slate-400 hover:text-slate-200'}`}
             onClick={() => setMode("Tabel")}
           >
-            <Table size={18} /> Data Tabel
+            <Table size={18} className="shrink-0" /> Data Tabel
           </button>
         </div>
 
         <Card>
           <div className="flex items-center gap-3 border-b border-slate-700/50 pb-4 mb-5">
-            <Settings2 className="text-cyan-400" />
-            <h3 className="text-lg font-semibold tracking-wide">Pengaturan Input</h3>
+            <Settings2 className="text-cyan-400 shrink-0" />
+            <h3 className="text-base sm:text-lg font-semibold tracking-wide">Pengaturan Input</h3>
           </div>
 
           {mode === "Persamaan" ? (
@@ -295,15 +295,15 @@ json.dumps(sanitize_nan(output))
                   type="text"
                   value={eqStr}
                   onChange={e => setEqStr(e.target.value)}
-                  className="w-full bg-slate-900/60 backdrop-blur-md border border-slate-700/50 rounded-xl px-4 py-3.5 text-slate-100 focus:outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all font-mono mb-2 shadow-inner"
+                  className="w-full bg-slate-900/60 backdrop-blur-md border border-slate-700/50 rounded-xl px-4 py-3.5 text-slate-100 focus:outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all font-mono mb-2 shadow-inner text-sm sm:text-base"
                 />
                 <p className="text-xs text-slate-500">Panduan: Gunakan <code className="bg-slate-800 px-1 rounded text-cyan-400">*</code> untuk kali, <code className="bg-slate-800 px-1 rounded text-cyan-400">**</code> untuk pangkat. Contoh: <code className="bg-slate-800 px-1 rounded text-cyan-400">3*x**2 - exp(x) + sin(x)</code></p>
               </div>
-              <div className="bg-slate-950/40 rounded-lg p-4 border border-slate-800 flex justify-center items-center">
+              <div className="bg-slate-950/40 rounded-lg p-4 border border-slate-800 flex justify-center items-center overflow-x-auto">
                 <LatexBlock tex={`f(x) = ${eqStr.replaceAll('**', '^').replaceAll('*', ' ').replace(/exp\((.*?)\)/g, 'e^{$1}').replace(/sin/g, '\\sin').replace(/cos/g, '\\cos').replace(/tan/g, '\\tan').replace(/log/g, '\\log')}`} />
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm text-slate-400 mb-2">Titik Evaluasi (x)</label>
                   <CustomNumberInput step="0.1" value={xVal} onChange={(e: any) => setXVal(parseFloat(e.target.value) || 0)} className="w-full bg-slate-900/60 backdrop-blur-md border border-slate-700/50 rounded-xl px-4 py-3 text-slate-100 focus:outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all" />
@@ -366,7 +366,7 @@ json.dumps(sanitize_nan(output))
                 <button onClick={() => setTableData([...tableData, { x: 0, fx: 0 }])} className="text-xs text-cyan-400 hover:text-cyan-300 py-2">+ Tambah Baris</button>
               </div>
 
-              <div className="grid grid-cols-2 gap-4 pt-4 border-t border-slate-700/50">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t border-slate-700/50">
                 <div>
                   <label className="block text-sm text-slate-400 mb-2">Titik Target (x)</label>
                   <CustomNumberInput step="0.1" value={targetX} onChange={(e: any) => setTargetX(parseFloat(e.target.value) || 0)} className="w-full bg-slate-950/50 border border-slate-700 rounded-lg px-4 py-2.5 text-slate-100" />
