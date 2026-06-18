@@ -30,9 +30,9 @@ const CustomNumberInput = ({ value, onChange, step = 1, min, max, className = ""
         onChange={onChange}
         className={`${className} pr-10 w-full`}
       />
-      <div className="absolute right-1 flex flex-col opacity-0 group-hover:opacity-100 transition-opacity bg-slate-900/80 rounded-md border border-slate-700/50 overflow-hidden shadow-lg backdrop-blur-sm">
-        <button onClick={handleIncrement} className="text-slate-400 hover:text-cyan-300 hover:bg-cyan-500/20 px-1 py-0.5 transition-colors border-b border-slate-700/50"><ChevronUp size={14} strokeWidth={3} /></button>
-        <button onClick={handleDecrement} className="text-slate-400 hover:text-fuchsia-300 hover:bg-fuchsia-500/20 px-1 py-0.5 transition-colors"><ChevronDown size={14} strokeWidth={3} /></button>
+      <div className="absolute right-1 flex flex-col opacity-60 hover:opacity-100 transition-opacity bg-slate-900/90 rounded-md border border-slate-700/50 overflow-hidden shadow-lg backdrop-blur-sm z-10">
+        <button onClick={handleIncrement} className="text-slate-400 hover:text-cyan-300 hover:bg-cyan-500/20 px-2 py-1 transition-colors border-b border-slate-700/50"><ChevronUp size={16} strokeWidth={3} /></button>
+        <button onClick={handleDecrement} className="text-slate-400 hover:text-fuchsia-300 hover:bg-fuchsia-500/20 px-2 py-1 transition-colors"><ChevronDown size={16} strokeWidth={3} /></button>
       </div>
     </div>
   );
