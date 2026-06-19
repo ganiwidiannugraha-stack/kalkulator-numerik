@@ -20,7 +20,15 @@ const CustomNumberInput = ({ value, onChange, step = 1, min, max, className = ""
   };
 
   return (
-    <div className={`relative group flex items-center ${wrapperClassName}`}>
+    <div className={`flex items-center gap-2 w-full ${wrapperClassName}`}>
+      <button 
+        onClick={handleDecrement} 
+        className="flex items-center justify-center bg-slate-800 border border-slate-600 rounded-lg p-2.5 text-fuchsia-400 hover:bg-fuchsia-500/20 active:bg-fuchsia-500/30 transition-colors shadow-md flex-shrink-0"
+        aria-label="Kurangi"
+      >
+        <ChevronDown size={18} strokeWidth={3} />
+      </button>
+      
       <input
         type="number"
         step={step}
@@ -28,12 +36,16 @@ const CustomNumberInput = ({ value, onChange, step = 1, min, max, className = ""
         max={max}
         value={value}
         onChange={onChange}
-        className={`${className} pr-10 w-full`}
+        className={`flex-1 min-w-0 text-center ${className}`}
       />
-      <div className="absolute right-1 flex flex-col opacity-100 bg-slate-800 rounded-md border border-slate-600 overflow-hidden shadow-lg z-10">
-        <button onClick={handleIncrement} className="text-cyan-400 hover:bg-cyan-500/20 px-2 py-1 transition-colors border-b border-slate-600 active:bg-cyan-500/30"><ChevronUp size={16} strokeWidth={3} /></button>
-        <button onClick={handleDecrement} className="text-fuchsia-400 hover:bg-fuchsia-500/20 px-2 py-1 transition-colors active:bg-fuchsia-500/30"><ChevronDown size={16} strokeWidth={3} /></button>
-      </div>
+      
+      <button 
+        onClick={handleIncrement} 
+        className="flex items-center justify-center bg-slate-800 border border-slate-600 rounded-lg p-2.5 text-cyan-400 hover:bg-cyan-500/20 active:bg-cyan-500/30 transition-colors shadow-md flex-shrink-0"
+        aria-label="Tambah"
+      >
+        <ChevronUp size={18} strokeWidth={3} />
+      </button>
     </div>
   );
 };
