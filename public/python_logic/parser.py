@@ -9,7 +9,7 @@ def parse_and_evaluate_equation(equation_str, x_val, h, grid_offset=4):
     x = sp.Symbol('x')
     
     try:
-        expr = sp.sympify(equation_str)
+        expr = sp.sympify(equation_str, locals={'e': sp.E})
         f_num = sp.lambdify(x, expr, modules=['numpy', 'sympy'])
         
         indices = range(-grid_offset, grid_offset + 1)

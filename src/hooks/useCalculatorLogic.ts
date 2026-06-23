@@ -14,7 +14,7 @@ export function useCalculatorLogic(pyodide: any) {
   // ==========================================
   // STATE MODE PERSAMAAN (FUNGSI ANALITIK)
   // ==========================================
-  const [eqStr, setEqStr] = useState("3*x**2 - cos(x)");
+  const [eqStr, setEqStr] = useState("3*x*e**x - cos(x)");
   const [xVal, setXVal] = useState<number | string>(1.0);
   const [hVal, setHVal] = useState<number | string>(0.1);
   const [gridOffset, setGridOffset] = useState<number | string>(4);
