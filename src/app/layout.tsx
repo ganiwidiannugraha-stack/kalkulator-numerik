@@ -29,7 +29,7 @@ export default function RootLayout({
           href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
         />
       </head>
-      <body className={`${inter.className} bg-slate-950 text-slate-100 min-h-screen antialiased`}>
+      <body className={`${inter.className} bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 min-h-screen antialiased transition-colors duration-300`}>
         {children}
         <SpeedInsights />
       </body>
