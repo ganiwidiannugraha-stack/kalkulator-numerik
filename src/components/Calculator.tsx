@@ -57,6 +57,7 @@ export default function Calculator() {
             rows: [
               [
                 { latex: 'x', class: 'keycap font-bold text-xl' },
+                { latex: 'y', class: 'keycap font-bold text-xl' },
                 { latex: 'e', class: 'keycap font-bold text-lg' },
                 { latex: '\\pi', class: 'keycap font-bold text-lg' },
                 { label: '7', key: '7', class: 'keycap font-bold text-lg' },
@@ -67,6 +68,7 @@ export default function Calculator() {
                 { latex: '\\cos', class: 'keycap font-bold' }
               ],
               [
+                { latex: 'x^2', insert: '^2', class: 'keycap font-bold text-lg' },
                 { latex: 'x^\\square', insert: '^{#?}', class: 'keycap font-bold text-lg' },
                 { latex: '\\sqrt{#?}', class: 'keycap font-bold text-lg' },
                 { latex: '|#?|', class: 'keycap font-bold text-lg' },
@@ -78,25 +80,25 @@ export default function Calculator() {
                 { latex: '\\log', class: 'keycap font-bold' }
               ],
               [
+                { latex: '\\frac{#?}{#?}', class: 'keycap font-bold text-lg' },
                 { latex: '(', class: 'keycap font-bold text-xl' },
                 { latex: ')', class: 'keycap font-bold text-xl' },
-                { latex: '\\frac{#?}{#?}', class: 'keycap font-bold text-lg' },
                 { label: '1', key: '1', class: 'keycap font-bold text-lg' },
                 { label: '2', key: '2', class: 'keycap font-bold text-lg' },
                 { label: '3', key: '3', class: 'keycap font-bold text-lg' },
                 { latex: '-', class: 'keycap action font-bold text-xl' },
                 { latex: '\\ln', class: 'keycap font-bold' },
-                { label: '⌫', command: ['performWithFeedback', 'deleteBackward'], class: 'keycap action font-glyph bottom right text-red-400' }
+                { label: '⌫', command: ['performWithFeedback', 'deleteBackward'], class: 'keycap action font-glyph bottom right text-red-400 w20', title: 'Hapus' }
               ],
               [
-                { label: '0', key: '0', class: 'keycap font-bold text-lg' },
+                { label: '0', key: '0', class: 'keycap font-bold text-lg w20' },
                 { label: '.', key: '.', class: 'keycap font-bold text-xl' },
                 { label: ',', key: ',', class: 'keycap font-bold text-xl' },
                 { latex: '=', class: 'keycap font-bold text-xl' },
                 { latex: '+', class: 'keycap action font-bold text-xl' },
                 { label: '←', command: ['performWithFeedback', 'moveToPreviousChar'], class: 'keycap action' },
                 { label: '→', command: ['performWithFeedback', 'moveToNextChar'], class: 'keycap action' },
-                { label: '↓', command: ['toggleVirtualKeyboard'], class: 'keycap action font-bold text-cyan-400', title: 'Tutup Keyboard' }
+                { label: '↓', command: ['toggleVirtualKeyboard'], class: 'keycap action font-bold text-cyan-400 w20', title: 'Tutup Keyboard' }
               ]
             ]
           },
