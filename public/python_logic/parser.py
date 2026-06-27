@@ -6,10 +6,10 @@ def parse_and_evaluate_equation(equation_str, x_val, h, grid_offset=4):
     Parses a math equation string, evaluates it around x_val with step h,
     and returns exact derivatives.
     """
-    x = sp.Symbol('x')
+    x = sp.Symbol('x', real=True)
     
     try:
-        expr = sp.sympify(equation_str, locals={'e': sp.E})
+        expr = sp.sympify(equation_str, locals={'e': sp.E, 'x': x})
         f_num = sp.lambdify(x, expr, modules=['numpy', 'sympy'])
         
         indices = range(-grid_offset, grid_offset + 1)

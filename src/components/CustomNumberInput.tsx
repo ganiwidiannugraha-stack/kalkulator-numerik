@@ -47,6 +47,7 @@ export const CustomNumberInput = ({ value, onChange, step = 1, min, max, classNa
       
       <input
         type="number"
+        inputMode="decimal"
         step={step}
         min={min}
         max={max}
