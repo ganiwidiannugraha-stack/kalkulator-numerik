@@ -80,24 +80,24 @@ export default function Calculator() {
                 { latex: '\\log', class: 'keycap font-bold' }
               ],
               [
-                { latex: '\\frac{#?}{#?}', class: 'keycap font-bold text-lg' },
                 { latex: '(', class: 'keycap font-bold text-xl' },
                 { latex: ')', class: 'keycap font-bold text-xl' },
+                { latex: '\\frac{#?}{#?}', class: 'keycap font-bold text-lg' },
+                { latex: '\\ln', class: 'keycap font-bold' },
                 { label: '1', key: '1', class: 'keycap font-bold text-lg' },
                 { label: '2', key: '2', class: 'keycap font-bold text-lg' },
                 { label: '3', key: '3', class: 'keycap font-bold text-lg' },
                 { latex: '-', class: 'keycap action font-bold text-xl' },
-                { latex: '\\ln', class: 'keycap font-bold' },
                 { label: '⌫', command: ['performWithFeedback', 'deleteBackward'], class: 'keycap action font-glyph bottom right text-red-400 w20', title: 'Hapus' }
               ],
               [
-                { label: '0', key: '0', class: 'keycap font-bold text-lg w20' },
-                { label: '.', key: '.', class: 'keycap font-bold text-xl' },
-                { label: ',', key: ',', class: 'keycap font-bold text-xl' },
-                { latex: '=', class: 'keycap font-bold text-xl' },
-                { latex: '+', class: 'keycap action font-bold text-xl' },
                 { label: '←', command: ['performWithFeedback', 'moveToPreviousChar'], class: 'keycap action' },
                 { label: '→', command: ['performWithFeedback', 'moveToNextChar'], class: 'keycap action' },
+                { label: ',', key: ',', class: 'keycap font-bold text-xl' },
+                { latex: '=', class: 'keycap font-bold text-xl' },
+                { label: '0', key: '0', class: 'keycap font-bold text-lg w20' },
+                { label: '.', key: '.', class: 'keycap font-bold text-xl' },
+                { latex: '+', class: 'keycap action font-bold text-xl' },
                 { label: '↓', command: ['toggleVirtualKeyboard'], class: 'keycap action font-bold text-cyan-400 w20', title: 'Tutup Keyboard' }
               ]
             ]
