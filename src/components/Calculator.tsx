@@ -50,6 +50,20 @@ export default function Calculator() {
       if (typeof window !== 'undefined' && (window as any).mathVirtualKeyboard) {
         const mvk = (window as any).mathVirtualKeyboard;
         
+        // Mencegah bug keyboard virtual mantul (terbuka lagi) di mobile saat tombol tutup ditekan
+        const handleToggle = () => {
+          if (!mvk.visible && document.activeElement?.tagName.toLowerCase() === 'math-field') {
+            (document.activeElement as HTMLElement).blur();
+          }
+        };
+        
+        // Bersihkan listener lama (berguna untuk React Strict Mode) agar tidak menumpuk
+        if ((window as any).__mvkToggleHandler) {
+          mvk.removeEventListener('virtual-keyboard-toggle', (window as any).__mvkToggleHandler);
+        }
+        (window as any).__mvkToggleHandler = handleToggle;
+        mvk.addEventListener('virtual-keyboard-toggle', handleToggle);
+
         // Define Custom Layout for Calculator
         mvk.layouts = [
           {
