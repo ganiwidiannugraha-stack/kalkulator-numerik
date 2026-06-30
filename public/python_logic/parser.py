@@ -1,7 +1,7 @@
 import sympy as sp
 import numpy as np
 
-def parse_and_evaluate_equation(equation_str, x_val, h, grid_offset=4):
+def parse_and_evaluate_equation(equation_str, x_val, h, grid_offset=4, precision=6):
     """
     Parses a math equation string, evaluates it around x_val with step h,
     and returns exact derivatives.
@@ -41,7 +41,7 @@ def parse_and_evaluate_equation(equation_str, x_val, h, grid_offset=4):
             if float(x_val).is_integer():
                 subbed_expr = expr_prime.subs(x, int(x_val))
             else:
-                subbed_expr = expr_prime.subs(x, sp.UnevaluatedExpr(round(x_val, 6)))
+                subbed_expr = expr_prime.subs(x, sp.UnevaluatedExpr(round(x_val, precision)))
                 
             latex_subbed = sp.latex(subbed_expr)
             
@@ -49,7 +49,7 @@ def parse_and_evaluate_equation(equation_str, x_val, h, grid_offset=4):
             step_str = (
                 rf"f^{{{prime_str}}}(x) &= {latex_func} \\"
                 rf"f^{{{prime_str}}}({x_val}) &= {latex_subbed} \\"
-                rf"&= {final_val:.6f}"
+                rf"&= {final_val:.{precision}f}"
             )
             exact_exprs[orde] = step_str
         

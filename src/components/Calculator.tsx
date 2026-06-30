@@ -34,6 +34,7 @@ export default function Calculator() {
     xVal, setXVal,
     hVal, setHVal,
     gridOffset, setGridOffset,
+    precision, setPrecision,
     tableData, setTableData,
     targetX, setTargetX,
     hValTable, setHValTable,
@@ -253,9 +254,15 @@ export default function Calculator() {
                 </div>
               </div>
 
-              <div>
-                <label className="block text-sm text-slate-700 dark:text-slate-400 mb-2">Batas Data Grid (Offset ±)</label>
-                <CustomNumberInput step="1" min="1" max="10" value={gridOffset} onChange={(e: any) => setGridOffset(e.target.value === '' ? '' : e.target.value)} className="w-full bg-slate-50/80 dark:bg-slate-900/60 backdrop-blur-md border border-slate-200 dark:border-slate-700/50 rounded-xl px-4 py-3 text-slate-900 dark:text-slate-100 focus:outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all" />
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm text-slate-700 dark:text-slate-400 mb-2">Batas Data Grid (Offset ±)</label>
+                  <CustomNumberInput step="1" min="1" max="10" value={gridOffset} onChange={(e: any) => setGridOffset(e.target.value === '' ? '' : e.target.value)} className="w-full bg-slate-50/80 dark:bg-slate-900/60 backdrop-blur-md border border-slate-200 dark:border-slate-700/50 rounded-xl px-4 py-3 text-slate-900 dark:text-slate-100 focus:outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all" />
+                </div>
+                <div>
+                  <label className="block text-sm text-slate-700 dark:text-slate-400 mb-2">Presisi (Angka Koma)</label>
+                  <CustomNumberInput step="1" min="1" max="15" value={precision} onChange={(e: any) => setPrecision(e.target.value === '' ? '' : e.target.value)} className="w-full bg-slate-50/80 dark:bg-slate-900/60 backdrop-blur-md border border-slate-200 dark:border-slate-700/50 rounded-xl px-4 py-3 text-slate-900 dark:text-slate-100 focus:outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all" />
+                </div>
               </div>
 
               <button

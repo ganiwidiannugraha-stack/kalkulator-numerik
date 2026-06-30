@@ -18,6 +18,7 @@ export function useCalculatorLogic(pyodide: any) {
   const [xVal, setXVal] = useState<number | string>(1.0);
   const [hVal, setHVal] = useState<number | string>(0.1);
   const [gridOffset, setGridOffset] = useState<number | string>(4);
+  const [precision, setPrecision] = useState<number | string>(6);
 
   // ==========================================
   // STATE MODE TABEL (DATA DISKRIT)
@@ -59,7 +60,7 @@ export function useCalculatorLogic(pyodide: any) {
     const h = parseFloat(hVal as string);
     const go = parseInt(gridOffset as string);
 
-    if (!eqStr.trim() || isNaN(x) || isNaN(h) || isNaN(go)) {
+    if (!eqStr.trim() || isNaN(x) || isNaN(h) || isNaN(go) || isNaN(parseInt(precision as string))) {
       setError("Mohon isi semua input dengan format angka yang valid.");
       setIsCalculating(false);
       return;
@@ -70,6 +71,7 @@ export function useCalculatorLogic(pyodide: any) {
       pyodide.globals.set("x_val", x);
       pyodide.globals.set("h_val", h);
       pyodide.globals.set("grid_offset", go);
+      pyodide.globals.set("precision_val", parseInt(precision as string) || 6);
 
       const code = `
 import sys
@@ -80,7 +82,7 @@ from methods.parser import parse_and_evaluate_equation
 from methods.derivatives import first_derivative, second_derivative, third_derivative, fourth_derivative, richardson_extrapolation
 import json
 
-success, f_vals, exact_vals, exact_exprs, x_grid, err_msg = parse_and_evaluate_equation(eq_str, x_val, h_val, grid_offset)
+success, f_vals, exact_vals, exact_exprs, x_grid, err_msg = parse_and_evaluate_equation(eq_str, x_val, h_val, grid_offset, precision_val)
 
 if success:
     import sympy as sp
@@ -92,14 +94,14 @@ if success:
     for i, xv in zip(range(-grid_offset, grid_offset + 1), x_grid):
         if i in f_vals:
             val = f_vals[i]
-            num_str = f"({xv:.6f})" if xv < 0 else f"{xv:.6f}"
+            num_str = f"({xv:.{precision_val}f})" if xv < 0 else f"{xv:.{precision_val}f}"
             dummy_x = sp.Symbol(num_str)
             subbed_expr = expr_sym.subs(x_sym, dummy_x)
             latex_subbed = sp.latex(subbed_expr)
             substitusi_steps.append({
                 "x": xv,
                 "val": val,
-                "step": f"f(x) &= {latex_func} \\\\\\\\ f({xv:.6f}) &= {latex_subbed} \\\\\\\\ &= {val:.6f}"
+                "step": f"f(x) &= {latex_func} \\\\\\\\ f({xv:.{precision_val}f}) &= {latex_subbed} \\\\\\\\ &= {val:.{precision_val}f}"
             })
             
     methods_dict = {
@@ -146,7 +148,7 @@ json.dumps(sanitize_nan(output))
       const res = JSON.parse(resJson);
       if (!res.success) throw new Error(res.err_msg);
 
-      setResult({ mode: "Persamaan", h: hVal, target: xVal, ...res });
+      setResult({ mode: "Persamaan", h: hVal, target: xVal, precision: parseInt(precision as string) || 6, ...res });
     } catch (e: any) {
       setError(e.message || String(e));
     } finally {
@@ -243,7 +245,7 @@ json.dumps(sanitize_nan(output))
       const res = JSON.parse(resJson);
       if (!res.success) throw new Error(res.err_msg);
 
-      setResult({ mode: "Tabel", h: res.h_ext, target: targetX, ...res });
+      setResult({ mode: "Tabel", h: res.h_ext, target: targetX, precision: parseInt(precision as string) || 6, ...res });
     } catch (e: any) {
       setError(e.message || String(e));
     } finally {
@@ -257,6 +259,7 @@ json.dumps(sanitize_nan(output))
     xVal, setXVal,
     hVal, setHVal,
     gridOffset, setGridOffset,
+    precision, setPrecision,
     tableData, setTableData,
     targetX, setTargetX,
     hValTable, setHValTable,
