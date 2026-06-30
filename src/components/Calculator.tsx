@@ -269,13 +269,13 @@ export default function Calculator() {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
                 <div>
-                  <label className="block text-sm text-slate-700 dark:text-slate-400 mb-2">Filter Orde Hasil</label>
+                  <label className="block text-sm text-slate-700 dark:text-slate-400 mb-2">Filter Tingkat Turunan</label>
                   <select value={targetOrder} onChange={(e: any) => setTargetOrder(e.target.value)} className="w-full bg-slate-50/80 dark:bg-slate-900/60 backdrop-blur-md border border-slate-200 dark:border-slate-700/50 rounded-xl px-4 py-3 text-slate-900 dark:text-slate-100 focus:outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all">
-                    <option value="Semua Orde">Tampilkan Semua Orde</option>
-                    <option value="1">Orde 1</option>
-                    <option value="2">Orde 2</option>
-                    <option value="3">Orde 3</option>
-                    <option value="4">Orde 4</option>
+                    <option value="Semua Orde">Tampilkan Semua Turunan</option>
+                    <option value="1">Turunan ke-1</option>
+                    <option value="2">Turunan ke-2</option>
+                    <option value="3">Turunan ke-3</option>
+                    <option value="4">Turunan ke-4</option>
                     <option value="5">Hanya Ekstrapolasi Richardson</option>
                   </select>
                 </div>
@@ -354,13 +354,13 @@ export default function Calculator() {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t border-slate-200 dark:border-slate-700/50">
                 <div>
-                  <label className="block text-sm text-slate-700 dark:text-slate-400 mb-2">Filter Orde Hasil</label>
+                  <label className="block text-sm text-slate-700 dark:text-slate-400 mb-2">Filter Tingkat Turunan</label>
                   <select value={targetOrder} onChange={(e: any) => setTargetOrder(e.target.value)} className="w-full bg-slate-50 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-700 rounded-lg px-4 py-3 text-slate-900 dark:text-slate-100">
-                    <option value="Semua Orde">Tampilkan Semua Orde</option>
-                    <option value="1">Orde 1</option>
-                    <option value="2">Orde 2</option>
-                    <option value="3">Orde 3</option>
-                    <option value="4">Orde 4</option>
+                    <option value="Semua Orde">Tampilkan Semua Turunan</option>
+                    <option value="1">Turunan ke-1</option>
+                    <option value="2">Turunan ke-2</option>
+                    <option value="3">Turunan ke-3</option>
+                    <option value="4">Turunan ke-4</option>
                     <option value="5">Hanya Ekstrapolasi Richardson</option>
                   </select>
                 </div>
