@@ -135,7 +135,12 @@ function TurunanTab({ orde, result }: { orde: number, result: any }) {
 
   const filtered_methods = targetMethod === "Semua Metode" 
     ? methods_list 
-    : methods_list.filter((m: any) => m.method.toLowerCase().includes(targetMethod.toLowerCase()));
+    : methods_list.filter((m: any) => {
+        if (targetMethod.includes("O(")) {
+          return m.method === targetMethod;
+        }
+        return m.method.toLowerCase().includes(targetMethod.toLowerCase());
+      });
 
   return (
     <div className="space-y-6 animate-in fade-in duration-500">

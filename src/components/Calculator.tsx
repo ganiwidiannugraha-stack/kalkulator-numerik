@@ -283,9 +283,18 @@ export default function Calculator() {
                   <label className="block text-sm text-slate-700 dark:text-slate-400 mb-2">Filter Metode Hasil</label>
                   <select value={targetMethod} onChange={(e: any) => setTargetMethod(e.target.value)} className="w-full bg-slate-50/80 dark:bg-slate-900/60 backdrop-blur-md border border-slate-200 dark:border-slate-700/50 rounded-xl px-4 py-3 text-slate-900 dark:text-slate-100 focus:outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all">
                     <option value="Semua Metode">Tampilkan Semua Metode</option>
-                    <option value="Selisih Maju">Selisih Maju</option>
-                    <option value="Selisih Mundur">Selisih Mundur</option>
-                    <option value="Selisih Pusat">Selisih Pusat</option>
+                    <optgroup label="Spesifik Orde (Ketelitian)">
+                      <option value="Selisih Maju O(h)">Selisih Maju O(h)</option>
+                      <option value="Selisih Maju O(h^2)">Selisih Maju O(h²)</option>
+                      <option value="Selisih Mundur O(h)">Selisih Mundur O(h)</option>
+                      <option value="Selisih Pusat O(h^2)">Selisih Pusat O(h²)</option>
+                      <option value="Selisih Pusat O(h^4)">Selisih Pusat O(h⁴)</option>
+                    </optgroup>
+                    <optgroup label="Berdasarkan Arah">
+                      <option value="Selisih Maju">Semua Selisih Maju</option>
+                      <option value="Selisih Mundur">Semua Selisih Mundur</option>
+                      <option value="Selisih Pusat">Semua Selisih Pusat</option>
+                    </optgroup>
                   </select>
                 </div>
               </div>
@@ -368,9 +377,18 @@ export default function Calculator() {
                   <label className="block text-sm text-slate-700 dark:text-slate-400 mb-2">Filter Metode Hasil</label>
                   <select value={targetMethod} onChange={(e: any) => setTargetMethod(e.target.value)} className="w-full bg-slate-50 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-700 rounded-lg px-4 py-3 text-slate-900 dark:text-slate-100">
                     <option value="Semua Metode">Tampilkan Semua Metode</option>
-                    <option value="Selisih Maju">Selisih Maju</option>
-                    <option value="Selisih Mundur">Selisih Mundur</option>
-                    <option value="Selisih Pusat">Selisih Pusat</option>
+                    <optgroup label="Spesifik Orde (Ketelitian)">
+                      <option value="Selisih Maju O(h)">Selisih Maju O(h)</option>
+                      <option value="Selisih Maju O(h^2)">Selisih Maju O(h²)</option>
+                      <option value="Selisih Mundur O(h)">Selisih Mundur O(h)</option>
+                      <option value="Selisih Pusat O(h^2)">Selisih Pusat O(h²)</option>
+                      <option value="Selisih Pusat O(h^4)">Selisih Pusat O(h⁴)</option>
+                    </optgroup>
+                    <optgroup label="Berdasarkan Arah">
+                      <option value="Selisih Maju">Semua Selisih Maju</option>
+                      <option value="Selisih Mundur">Semua Selisih Mundur</option>
+                      <option value="Selisih Pusat">Semua Selisih Pusat</option>
+                    </optgroup>
                   </select>
                 </div>
               </div>
