@@ -11,8 +11,16 @@ import { ChevronDown, ChevronRight } from 'lucide-react';
  * @param {Object} props Menyimpan data hasil mentah dari runtime Python
  */
 export function ResultView({ result }: { result: any }) {
-  // Mengontrol Active Tab dari 1 hingga 5 (1-4 = Orde Turunan, 5 = Ekstrapolasi)
-  const [activeTab, setActiveTab] = useState(1);
+  const defaultTab = result.targetOrder && result.targetOrder !== "Semua Orde" ? parseInt(result.targetOrder) : 1;
+  const [activeTab, setActiveTab] = React.useState(defaultTab);
+
+  React.useEffect(() => {
+    if (result.targetOrder && result.targetOrder !== "Semua Orde") {
+      setActiveTab(parseInt(result.targetOrder));
+    }
+  }, [result.targetOrder]);
+
+  const showTabs = !result.targetOrder || result.targetOrder === "Semua Orde";
 
   return (
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
@@ -83,23 +91,25 @@ export function ResultView({ result }: { result: any }) {
       {/* TABS (TURUNAN & RICHARDSON EXTRAPOLATION)           */}
       {/* ---------------------------------------------------- */}
       <div>
-        <div className="flex space-x-1 bg-slate-100 dark:bg-slate-800/50 p-1 rounded-xl mb-6 overflow-x-auto">
-          {[1, 2, 3, 4].map(orde => (
+        {showTabs && (
+          <div className="flex space-x-1 bg-slate-100 dark:bg-slate-800/50 p-1 rounded-xl mb-6 overflow-x-auto">
+            {[1, 2, 3, 4].map(orde => (
+              <button
+                key={orde}
+                onClick={() => setActiveTab(orde)}
+                className={`flex-1 min-w-[100px] py-3 px-4 text-sm font-medium rounded-lg transition-all whitespace-nowrap ${activeTab === orde ? 'bg-gradient-to-r from-cyan-600 to-blue-600 text-white shadow-lg shadow-cyan-500/25 border-transparent' : 'text-slate-700 dark:text-slate-400 hover:text-slate-900 hover:bg-slate-300/50 dark:hover:text-slate-100 dark:hover:bg-slate-700/50'}`}
+              >
+                Turunan ke-{orde}
+              </button>
+            ))}
             <button
-              key={orde}
-              onClick={() => setActiveTab(orde)}
-              className={`flex-1 min-w-[100px] py-3 px-4 text-sm font-medium rounded-lg transition-all whitespace-nowrap ${activeTab === orde ? 'bg-gradient-to-r from-cyan-600 to-blue-600 text-white shadow-lg shadow-cyan-500/25 border-transparent' : 'text-slate-700 dark:text-slate-400 hover:text-slate-900 hover:bg-slate-300/50 dark:hover:text-slate-100 dark:hover:bg-slate-700/50'}`}
+              onClick={() => setActiveTab(5)}
+              className={`flex-1 min-w-[160px] py-3 px-4 text-sm font-medium rounded-lg transition-all whitespace-nowrap ${activeTab === 5 ? 'bg-gradient-to-r from-fuchsia-600 to-purple-600 text-white shadow-lg shadow-fuchsia-500/25 border-transparent' : 'text-slate-700 dark:text-slate-400 hover:text-slate-900 hover:bg-slate-300/50 dark:hover:text-slate-100 dark:hover:bg-slate-700/50'}`}
             >
-              Turunan ke-{orde}
+              Ekstrapolasi Richardson
             </button>
-          ))}
-          <button
-            onClick={() => setActiveTab(5)}
-            className={`flex-1 min-w-[160px] py-3 px-4 text-sm font-medium rounded-lg transition-all whitespace-nowrap ${activeTab === 5 ? 'bg-gradient-to-r from-fuchsia-600 to-purple-600 text-white shadow-lg shadow-fuchsia-500/25 border-transparent' : 'text-slate-700 dark:text-slate-400 hover:text-slate-900 hover:bg-slate-300/50 dark:hover:text-slate-100 dark:hover:bg-slate-700/50'}`}
-          >
-            Ekstrapolasi Richardson
-          </button>
-        </div>
+          </div>
+        )}
 
         {/* Konten Tab Aktif */}
         <div className="bg-slate-50/80 dark:bg-slate-900/30 rounded-xl p-1">
@@ -118,30 +128,17 @@ export function ResultView({ result }: { result: any }) {
  * Komponen Sub-Tab Orde Turunan Numerik
  */
 function TurunanTab({ orde, result }: { orde: number, result: any }) {
-  const [selectedMethod, setSelectedMethod] = useState("Semua Metode");
   const exact = result.exact_vals ? result.exact_vals[orde] : null;
   const methods_list = result.derivatives[orde] || [];
   const precision = result.precision || 6;
+  const targetMethod = result.targetMethod || "Semua Metode";
 
-  const filtered_methods = selectedMethod === "Semua Metode" 
+  const filtered_methods = targetMethod === "Semua Metode" 
     ? methods_list 
-    : methods_list.filter((m: any) => m.method.toLowerCase().includes(selectedMethod.toLowerCase()));
+    : methods_list.filter((m: any) => m.method.toLowerCase().includes(targetMethod.toLowerCase()));
 
   return (
     <div className="space-y-6 animate-in fade-in duration-500">
-      
-      <div className="flex justify-end">
-        <select 
-          value={selectedMethod} 
-          onChange={(e) => setSelectedMethod(e.target.value)}
-          className="bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-sm rounded-lg focus:ring-cyan-500 focus:border-cyan-500 block p-2.5 outline-none"
-        >
-          <option value="Semua Metode">Tampilkan Semua Metode</option>
-          <option value="Selisih Maju">Selisih Maju</option>
-          <option value="Selisih Mundur">Selisih Mundur</option>
-          <option value="Selisih Pusat">Selisih Pusat</option>
-        </select>
-      </div>
 
       {/* Banner Nilai Evaluasi Analitik Sejati */}
       {exact !== null && (

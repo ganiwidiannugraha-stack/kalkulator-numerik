@@ -19,6 +19,10 @@ export function useCalculatorLogic(pyodide: any) {
   const [hVal, setHVal] = useState<number | string>(0.1);
   const [gridOffset, setGridOffset] = useState<number | string>(4);
   const [precision, setPrecision] = useState<number | string>(6);
+  
+  // FILTER HASIL
+  const [targetOrder, setTargetOrder] = useState<string>("Semua Orde");
+  const [targetMethod, setTargetMethod] = useState<string>("Semua Metode");
 
   // ==========================================
   // STATE MODE TABEL (DATA DISKRIT)
@@ -148,7 +152,7 @@ json.dumps(sanitize_nan(output))
       const res = JSON.parse(resJson);
       if (!res.success) throw new Error(res.err_msg);
 
-      setResult({ mode: "Persamaan", h: hVal, target: xVal, precision: parseInt(precision as string) || 6, ...res });
+      setResult({ mode: "Persamaan", h: hVal, target: xVal, precision: parseInt(precision as string) || 6, targetOrder, targetMethod, ...res });
     } catch (e: any) {
       setError(e.message || String(e));
     } finally {
@@ -245,7 +249,7 @@ json.dumps(sanitize_nan(output))
       const res = JSON.parse(resJson);
       if (!res.success) throw new Error(res.err_msg);
 
-      setResult({ mode: "Tabel", h: res.h_ext, target: targetX, precision: parseInt(precision as string) || 6, ...res });
+      setResult({ mode: "Tabel", h: res.h_ext, target: targetX, precision: parseInt(precision as string) || 6, targetOrder, targetMethod, ...res });
     } catch (e: any) {
       setError(e.message || String(e));
     } finally {
@@ -260,6 +264,8 @@ json.dumps(sanitize_nan(output))
     hVal, setHVal,
     gridOffset, setGridOffset,
     precision, setPrecision,
+    targetOrder, setTargetOrder,
+    targetMethod, setTargetMethod,
     tableData, setTableData,
     targetX, setTargetX,
     hValTable, setHValTable,
