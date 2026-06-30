@@ -337,7 +337,7 @@ export default function Calculator() {
                 <button onClick={() => setTableData([...tableData, { x: 0, fx: 0 }])} className="text-xs text-cyan-400 hover:text-cyan-300 py-2">+ Tambah Baris</button>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t border-slate-200 dark:border-slate-700/50">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-slate-200 dark:border-slate-700/50">
                 <div>
                   <label className="block text-sm text-slate-700 dark:text-slate-400 mb-2">Titik Target (x)</label>
                   <CustomNumberInput step="0.1" value={targetX} onChange={(e: any) => setTargetX(e.target.value === '' ? '' : e.target.value)} className="w-full bg-slate-50 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-700 rounded-lg px-4 py-2.5 text-slate-900 dark:text-slate-100" />
@@ -345,6 +345,10 @@ export default function Calculator() {
                 <div>
                   <label className="block text-sm text-slate-700 dark:text-slate-400 mb-2">Langkah (h)</label>
                   <CustomNumberInput step="0.01" value={hValTable} onChange={(e: any) => setHValTable(e.target.value === '' ? '' : e.target.value)} className="w-full bg-slate-50 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-700 rounded-lg px-4 py-2.5 text-slate-900 dark:text-slate-100" />
+                </div>
+                <div>
+                  <label className="block text-sm text-slate-700 dark:text-slate-400 mb-2">Presisi (Koma)</label>
+                  <CustomNumberInput step="1" min="1" max="15" value={precision} onChange={(e: any) => setPrecision(e.target.value === '' ? '' : e.target.value)} className="w-full bg-slate-50 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-700 rounded-lg px-4 py-2.5 text-slate-900 dark:text-slate-100" />
                 </div>
               </div>
 
